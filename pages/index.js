@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { HostFinderModal } from '../components/HostFinder';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import styles from '../styles/Home.module.css';
+
+// InstUI really doesn't like being rendered server-side
+const HostFinderModalNoSSR = dynamic(() => import('../components/HostFinder'), { ssr: false });
 
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(true)
-
-  function handleClose() {
-    console.info('closing...');
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -18,13 +14,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1>
-          Demonstration of the Canvas Host Finder
-        </h1>
-        <div width="480px">
-          <HostFinderModal />
-        </div>
+      <main style={{ padding: '4rem 0', minHeight: '90vh' }}>
+        <h1>Demonstration of the Canvas Host Finder</h1>
+        <HostFinderModalNoSSR />
       </main>
 
       <footer className={styles.footer}>

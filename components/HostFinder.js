@@ -1,8 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
-import { arrayOf, bool, number, shape, string } from 'prop-types';
+import { arrayOf, bool, func, number, shape, string } from 'prop-types';
+import { Button, CloseButton } from '@instructure/ui-buttons';
+import { Heading } from '@instructure/ui-heading';
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link';
 import { List } from '@instructure/ui-list';
+import { Modal } from '@instructure/ui-modal'
 import { Spinner } from '@instructure/ui-spinner';
 import { Text } from '@instructure/ui-text';
 import { TextInput } from '@instructure/ui-text-input';
@@ -58,7 +61,7 @@ function ResultsArea({ results, pages, isLoading }) {
 ResultsArea.propTypes = {
   results: arrayOf(
     shape({
-      id: string.isRequired,
+      id: number.isRequired,
       name: string.isRequired,
       url: string.isRequired
     })
@@ -83,7 +86,7 @@ const HelpBlurb = () => (
   </View>
 );
 
-export function HostFinderModal() {
+export default function HostFinderModal() {
   const updateSearchTerm = useMemo(
     () =>
       debounce(v => {
@@ -150,6 +153,24 @@ export function HostFinderModal() {
     };
   }
 
+  function renderModalBody() {
+    return (
+      <View as="div" margin="small large" width="480px">
+        <TextInput
+          type="search"
+          value={host}
+          renderLabel="Search for your school or institution"
+          placeholder="Search…"
+          onChange={updateSearch}
+          messages={messages}
+          renderBeforeInput={<IconSearchLine inline={false} />}
+        />
+        <ResultsArea {...resultsProps} />
+        {shouldShowHelp && <HelpBlurb />}
+      </View>
+    );
+  }
+
   function updateSearch(e) {
     setHost(e.target.value);
     if (e.target.value.length < MIN_SEARCH_LENGTH) {
@@ -162,19 +183,5 @@ export function HostFinderModal() {
 
   useEffect(onNewSearchTerm, [searchTerm]);
 
-  return (
-    <View as="div" margin="small large" width="100%">
-      <TextInput
-        type="search"
-        value={host}
-        renderLabel="Search for your school or institution"
-        placeholder="Search…"
-        onChange={updateSearch}
-        messages={messages}
-        renderBeforeInput={<IconSearchLine inline={false} />}
-      />
-      <ResultsArea {...resultsProps} />
-      {shouldShowHelp && <HelpBlurb />}
-    </View>
-  );
+  return renderModalBody();
 }
