@@ -14,14 +14,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{ padding: '4rem 0', minHeight: '90vh' }}>
+      <main className={styles.main}>
         <h1>Demonstration of the Canvas Host Finder</h1>
         <p>(Code for this demo is on <a href="https://github.com/cvkline/host-finder-demo">GitHub)</a></p>
         <HostFinderModalNoSSR />
       </main>
 
       <footer className={styles.footer}>
-        created by <a href="https://github.com/cvkline">cvk</a>
+        created by &nbsp; <a href="https://github.com/cvkline">cvk</a>
       </footer>
     </div>
   )

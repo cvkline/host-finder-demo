@@ -1,15 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
-import { arrayOf, bool, func, number, shape, string } from 'prop-types';
-import { Button, CloseButton } from '@instructure/ui-buttons';
-import { Heading } from '@instructure/ui-heading';
+import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link';
 import { List } from '@instructure/ui-list';
-import { Modal } from '@instructure/ui-modal'
 import { Spinner } from '@instructure/ui-spinner';
 import { Text } from '@instructure/ui-text';
 import { TextInput } from '@instructure/ui-text-input';
 import { View } from '@instructure/ui-view';
+import styles from '../styles/Home.module.css';
 import { debounce } from 'lodash';
 import parseLinkHeader from 'parse-link-header';
 
@@ -147,6 +145,7 @@ export default function HostFinderModal() {
     }
 
     fetchHosts();
+
     return () => {
       aborting = true;
       aborter.abort();
@@ -155,7 +154,7 @@ export default function HostFinderModal() {
 
   function renderModalBody() {
     return (
-      <View as="div" margin="small large" width="480px">
+      <div className={styles.modalEnclosure}>
         <TextInput
           type="search"
           value={host}
@@ -167,7 +166,7 @@ export default function HostFinderModal() {
         />
         <ResultsArea {...resultsProps} />
         {shouldShowHelp && <HelpBlurb />}
-      </View>
+      </div>
     );
   }
 

@@ -2,13 +2,21 @@
   padding: 0 2rem;
 }
 
+.container a {
+  text-decoration: underline;
+  color: #3333ff;
+}
+
 .main {
   min-height: 90vh;
   padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.modalEnclosure {
+  width: 640px;
+  margin: 2rem 1rem;
+  padding: 1rem;
+  border: 2px solid blue;
 }
 
 .footer {
