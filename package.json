@@ -9,7 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@instructure/ui-buttons": "^8",
+    "@instructure/ui-heading": "^8",
+    "@instructure/ui-icons": "^8",
+    "@instructure/ui-link": "^8",
+    "@instructure/ui-list": "^8",
+    "@instructure/ui-modal": "^8",
+    "@instructure/ui-spinner": "^8",
+    "@instructure/ui-text": "^8",
+    "@instructure/ui-text-input": "^8",
+    "@instructure/ui-view": "^8",
+    "lodash": "^4.17",
     "next": "12.3.0",
+    "parse-link-header": "^2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
